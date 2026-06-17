@@ -17,9 +17,24 @@ Screenshots are useful for reviewers, contributors, and users, but they are also
 
 ## Safe Screenshot Workflow
 
+Recommended source for first public screenshots:
+
+```bash
+cd /path/to/OpenInfraHub
+python3 -m http.server 8080
+```
+
+Open:
+
+```text
+http://localhost:8080/demo/
+```
+
+Capture screenshots from that static demo before using any private deployment screenshots.
+
 1. Use generated sample data.
 2. Use `.example.local` hostnames.
-3. Use fake node names such as `proxmox-node-01`, `edge-node-01`, and `storage-01`.
+3. Use fake node names such as `node-alpha`, `node-beta`, and `demo-nas`.
 4. Crop browser chrome if it contains URLs or profiles.
 5. Review at 200 percent zoom before committing.
 6. Run OCR if possible.

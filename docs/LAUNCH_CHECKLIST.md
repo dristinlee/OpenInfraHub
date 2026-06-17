@@ -97,7 +97,7 @@ gh release create v0.1.0-docs-preview --title "v0.1.0 docs preview" --notes "Ini
 
 ## Next 7 Days
 
-- Build a public demo mode with generated sample data.
+- Build a public demo mode with generated sample data. Done in `demo/`.
 - Add Docker install verification.
 - Add typed config schema.
 - Add first Proxmox adapter proof of concept.

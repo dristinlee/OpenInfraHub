@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenInfraHub Demo</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <aside class="sidebar" aria-label="Primary">
+      <div class="brand">
+        <span class="brand-mark">OI</span>
+        <div>
+          <strong>OpenInfraHub</strong>
+          <span>Demo environment</span>
+        </div>
+      </div>
+      <nav>
+        <a class="active" href="#overview">Overview</a>
+        <a href="#nodes">Nodes</a>
+        <a href="#services">Services</a>
+        <a href="#topology">Topology</a>
+        <a href="#alerts">Alerts</a>
+        <a href="#storage">Storage</a>
+        <a href="#settings">Settings</a>
+      </nav>
+      <p class="notice">Generated sample data only. Do not paste private infrastructure details into public demos.</p>
+    </aside>
+
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Self-hosted infrastructure command center</p>
+          <h1>Operations Overview</h1>
+        </div>
+        <div class="status-pill">
+          <span></span>
+          Public demo mode
+        </div>
+      </header>
+
+      <section class="summary-grid" aria-label="Fleet summary">
+        <article>
+          <span>Nodes Online</span>
+          <strong id="nodes-online">--</strong>
+          <small>Fleet availability</small>
+        </article>
+        <article>
+          <span>Healthy Services</span>
+          <strong id="services-healthy">--</strong>
+          <small>Adapters reporting</small>
+        </article>
+        <article>
+          <span>Storage Used</span>
+          <strong id="storage-used">--</strong>
+          <small>Across sample pools</small>
+        </article>
+        <article>
+          <span>Open Alerts</span>
+          <strong id="open-alerts">--</strong>
+          <small>Needs review</small>
+        </article>
+      </section>
+
+      <section class="layout">
+        <article class="panel wide" id="nodes">
+          <div class="panel-header">
+            <h2>Node Inventory</h2>
+            <span>Sample fleet</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Node</th>
+                  <th>Role</th>
+                  <th>Address</th>
+                  <th>Status</th>
+                  <th>CPU</th>
+                  <th>Memory</th>
+                  <th>Uptime</th>
+                </tr>
+              </thead>
+              <tbody id="node-table"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel" id="topology">
+          <div class="panel-header">
+            <h2>Topology</h2>
+            <span>Generated map</span>
+          </div>
+          <div class="topology-map">
+            <div class="topology-node gateway">lab-router</div>
+            <div class="topology-row">
+              <div class="topology-node host">node-alpha</div>
+              <div class="topology-node host">node-beta</div>
+            </div>
+            <div class="topology-row">
+              <div class="topology-node service">vm-web-01</div>
+              <div class="topology-node service">lxc-monitor-01</div>
+              <div class="topology-node storage">demo-nas</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" id="services">
+          <div class="panel-header">
+            <h2>Services</h2>
+            <span>HTTP checks</span>
+          </div>
+          <div id="services-list" class="list"></div>
+        </article>
+
+        <article class="panel" id="storage">
+          <div class="panel-header">
+            <h2>Storage</h2>
+            <span>Sample pool</span>
+          </div>
+          <div class="storage-ring" aria-label="Storage usage">
+            <span id="storage-ring-value">--</span>
+          </div>
+          <div class="meter"><span id="storage-meter"></span></div>
+          <p class="muted">Capacity telemetry is sample-only and safe for public screenshots.</p>
+        </article>
+
+        <article class="panel" id="alerts">
+          <div class="panel-header">
+            <h2>Alerts</h2>
+            <span>Open incidents</span>
+          </div>
+          <div id="alerts-list" class="list"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Recent Events</h2>
+            <span>Activity stream</span>
+          </div>
+          <ul id="events-list" class="events"></ul>
+        </article>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

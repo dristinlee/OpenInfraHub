@@ -15,7 +15,26 @@ This repository is the public OSS version of a real deployed homelab operations 
 
 ## Current Status
 
-OpenInfraHub is in public launch preparation. The first public release focuses on safe, generic configuration, documentation, and a clean install path. The original private deployment is not published directly because it contains private network details.
+OpenInfraHub is in early public preview. The first release focuses on safe, generic configuration, documentation, a static demo mode, and a clean install path. The original private deployment is not published directly because it contains private network details.
+
+## Public Demo
+
+A static sample-data demo is available in [`demo/`](demo/). It uses generated infrastructure names, documentation-safe IP ranges, and fake service states only.
+
+Open it locally:
+
+```bash
+cd OpenInfraHub
+python3 -m http.server 8080
+```
+
+Then visit:
+
+```text
+http://localhost:8080/demo/
+```
+
+The demo is intentionally static so reviewers and contributors can inspect the product direction without requiring access to private infrastructure, API tokens, Proxmox, Tailscale, or monitoring services.
 
 ## Features
 
@@ -28,6 +47,7 @@ OpenInfraHub is in public launch preparation. The first public release focuses o
 - Alert and incident checklist for offline nodes, degraded services, and high resource use.
 - Mobile-first operations UI based on self-hosted dashboard patterns.
 - Future plugin support for monitoring adapters.
+- Public demo mode using generated sample data.
 
 ## Screenshots
 
@@ -94,6 +114,7 @@ Planned:
 |-- ROADMAP.md
 |-- .env.example
 |-- docker-compose.example.yml
+|-- demo/
 |-- config/examples/
 |-- docs/
 `-- .github/ISSUE_TEMPLATE/

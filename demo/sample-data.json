@@ -1,0 +1,84 @@
+{
+  "summary": {
+    "nodesOnline": 8,
+    "nodesTotal": 9,
+    "servicesHealthy": 14,
+    "servicesTotal": 16,
+    "storageUsedPercent": 62,
+    "openAlerts": 3
+  },
+  "nodes": [
+    {
+      "name": "node-alpha",
+      "role": "Virtualization host",
+      "address": "10.0.0.12",
+      "status": "online",
+      "cpu": 34,
+      "memory": 58,
+      "uptime": "18d 4h"
+    },
+    {
+      "name": "node-beta",
+      "role": "Container host",
+      "address": "10.0.0.24",
+      "status": "online",
+      "cpu": 41,
+      "memory": 67,
+      "uptime": "7d 2h"
+    },
+    {
+      "name": "demo-nas",
+      "role": "Storage",
+      "address": "10.0.0.40",
+      "status": "warning",
+      "cpu": 12,
+      "memory": 44,
+      "uptime": "44d 9h"
+    },
+    {
+      "name": "lab-router",
+      "role": "Gateway",
+      "address": "198.51.100.8",
+      "status": "online",
+      "cpu": 18,
+      "memory": 32,
+      "uptime": "91d 1h"
+    },
+    {
+      "name": "vm-web-01",
+      "role": "Web service",
+      "address": "10.0.1.15",
+      "status": "online",
+      "cpu": 23,
+      "memory": 51,
+      "uptime": "5d 12h"
+    },
+    {
+      "name": "lxc-monitor-01",
+      "role": "Monitoring",
+      "address": "10.0.1.20",
+      "status": "online",
+      "cpu": 29,
+      "memory": 49,
+      "uptime": "12d 6h"
+    }
+  ],
+  "services": [
+    { "name": "Metrics API", "target": "metrics.example.local", "status": "healthy", "latencyMs": 42 },
+    { "name": "Topology API", "target": "topology.example.local", "status": "healthy", "latencyMs": 57 },
+    { "name": "Storage Index", "target": "storage.example.local", "status": "degraded", "latencyMs": 214 },
+    { "name": "Remote Console", "target": "console.example.local", "status": "healthy", "latencyMs": 88 },
+    { "name": "Alert Router", "target": "alerts.example.local", "status": "offline", "latencyMs": null }
+  ],
+  "alerts": [
+    { "severity": "critical", "title": "Alert Router offline", "detail": "No heartbeat for 6 minutes" },
+    { "severity": "warning", "title": "demo-nas storage above target", "detail": "62% used, growth trend elevated" },
+    { "severity": "info", "title": "Topology refreshed", "detail": "9 nodes and 16 services indexed" }
+  ],
+  "events": [
+    "lxc-monitor-01 collected service metrics",
+    "node-beta reported container inventory",
+    "demo-nas crossed storage trend threshold",
+    "lab-router topology edge verified"
+  ]
+}
