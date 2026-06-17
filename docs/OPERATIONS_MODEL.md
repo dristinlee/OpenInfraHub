@@ -90,6 +90,12 @@ The first Proxmox adapter should be read-only and should capture:
 
 Never log tokens, endpoint URLs, or raw API responses in public samples.
 
+A concrete proof of concept lives at:
+
+```text
+scripts/proxmox-readonly-poc.mjs
+```
+
 ### Tailscale
 
 The first Tailscale adapter should import:

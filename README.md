@@ -127,6 +127,7 @@ Planned:
 See [docs/CONFIG_SCHEMA.md](docs/CONFIG_SCHEMA.md) for the v0.1 JSON Schema covering nodes, services, topology, storage, and alerts.
 See [docs/REDACTION_GUIDE.md](docs/REDACTION_GUIDE.md) for redaction and screenshot cleanup guidance.
 See [docs/OPERATIONS_MODEL.md](docs/OPERATIONS_MODEL.md) for the adapter and data-model notes that back the remaining public roadmap.
+See [docs/PROXMOX_READONLY_POC.md](docs/PROXMOX_READONLY_POC.md) for a read-only Proxmox collection example.
 
 ## Security Warning
 

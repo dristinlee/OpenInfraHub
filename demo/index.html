@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
+    <a href="#overview" class="notice" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
     <aside class="sidebar" aria-label="Primary">
       <div class="brand">
         <span class="brand-mark">OI</span>
@@ -15,7 +16,7 @@
           <span>Demo environment</span>
         </div>
       </div>
-      <nav>
+      <nav aria-label="Demo sections">
         <a class="active" href="#overview">Overview</a>
         <a href="#nodes">Nodes</a>
         <a href="#services">Services</a>
@@ -41,7 +42,7 @@
         </div>
       </header>
 
-      <section class="summary-grid" aria-label="Fleet summary">
+      <section class="summary-grid" aria-label="Fleet summary" id="overview">
         <article>
           <span>Nodes Online</span>
           <strong id="nodes-online">--</strong>
