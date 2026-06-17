@@ -1,0 +1,6 @@
+# Example only. Keep real token values in .env or local secret storage.
+---
+# - name: Sample Proxmox
+#   url: https://proxmox.example.local:8006
+#   token: "${PROXMOX_API_TOKEN_ID}"
+#   secret: "${PROXMOX_API_TOKEN_SECRET}"

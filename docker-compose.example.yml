@@ -1,0 +1,14 @@
+services:
+  openinfrahub:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: openinfrahub
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./config/examples:/app/config:ro
+      - ./public/images:/app/public/images:ro
+    env_file:
+      - .env
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: ${OPENINFRAHUB_ALLOWED_HOSTS:-localhost,127.0.0.1}

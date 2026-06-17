@@ -1,0 +1,9 @@
+- Operations:
+    - Proxmox:
+        - href: https://proxmox.example.local:8006
+    - Home Assistant:
+        - href: http://homeassistant.example.local:8123
+    - Out Of Band Management:
+        - href: https://idrac.example.local
+    - Tailscale Admin:
+        - href: https://login.tailscale.com/admin/machines

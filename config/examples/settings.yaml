@@ -1,0 +1,19 @@
+title: OpenInfraHub
+theme: dark
+color: slate
+headerStyle: clean
+hideVersion: true
+statusStyle: dot
+layout:
+  Servers:
+    style: row
+    columns: 4
+  Workstations:
+    style: row
+    columns: 4
+  Network:
+    style: row
+    columns: 4
+  Storage:
+    style: row
+    columns: 4

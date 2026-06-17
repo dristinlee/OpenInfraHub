@@ -1,0 +1,64 @@
+- Servers:
+    - Proxmox Node:
+        href: https://proxmox.example.local:8006
+        description: Virtualization host running VMs and LXC containers
+        icon: proxmox.png
+        siteMonitor: https://proxmox.example.local:8006
+    - Home Assistant:
+        href: http://homeassistant.example.local:8123
+        description: Smart home automation VM
+        icon: home-assistant.png
+        siteMonitor: http://homeassistant.example.local:8123
+    - Tailscale Router:
+        href: https://login.tailscale.com/admin/machines
+        description: Subnet router for a sample lab network
+        icon: tailscale.png
+        siteMonitor: http://tailscale-router.example.local
+    - Out Of Band Management:
+        href: https://idrac.example.local
+        description: Server management controller
+        icon: dell.png
+        siteMonitor: https://idrac.example.local
+
+- Workstations:
+    - Admin Workstation:
+        href: http://workstation.example.local
+        description: Technician desktop
+        icon: mdi-monitor
+        siteMonitor: http://workstation.example.local
+    - Mobile Admin Laptop:
+        href: http://laptop.example.local
+        description: Mobile operations laptop
+        icon: mdi-laptop
+        siteMonitor: http://laptop.example.local
+    - Raspberry Pi Edge Node:
+        href: http://edge-node.example.local
+        description: Lightweight service node
+        icon: raspberry-pi.png
+        siteMonitor: http://edge-node.example.local
+
+- Network:
+    - Fiber Gateway:
+        href: http://gateway.example.local
+        description: Internet gateway
+        icon: mdi-router-wireless
+        siteMonitor: http://gateway.example.local
+    - Managed Switch:
+        href: https://switch.example.local
+        description: PoE managed switch
+        icon: mdi-switch
+        siteMonitor: https://switch.example.local
+
+- Storage:
+    - Files:
+        href: smb://storage.example.local/files
+        description: Sample file share
+        icon: mdi-folder-network
+    - Photos:
+        href: smb://storage.example.local/photos
+        description: Sample photo archive
+        icon: mdi-image-multiple
+    - Datastore:
+        href: smb://storage.example.local/datastore
+        description: Sample datastore
+        icon: mdi-harddisk

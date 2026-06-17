@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+coverage/
+.DS_Store
+*.log
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.csr
+screenshots/private/
+config/private/
