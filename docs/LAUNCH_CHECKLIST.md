@@ -79,11 +79,11 @@ Copy issue titles and bodies from [ISSUES.md](ISSUES.md).
 
 ## Next 48 Hours
 
-- Replace placeholder screenshot section with generated sample screenshots.
+- Replace placeholder screenshot section with generated sample screenshots. Done in `docs/assets/`.
 - Add `docs/assets/` with redacted sample images only.
 - Add `v0.1.0-docs-preview` release tag.
 - Add a GitHub Discussion introduction post.
-- Add a simple CI workflow for Markdown linting and secret scanning.
+- Add a simple CI workflow for secret scanning. Done in `.github/workflows/secret-scan.yml`.
 - Open issues for Proxmox, Tailscale, Uptime Kuma, Docker, topology, and plugin work.
 - Write a short release note explaining that this is a public-safe extraction from a private deployment.
 
@@ -98,8 +98,8 @@ gh release create v0.1.0-docs-preview --title "v0.1.0 docs preview" --notes "Ini
 ## Next 7 Days
 
 - Build a public demo mode with generated sample data. Done in `demo/`.
-- Add Docker install verification.
-- Add typed config schema.
+- Add Docker install verification. Health check documented in `docs/INSTALL.md`.
+- Add typed config schema. Done in `schema/openinfrahub.schema.json`.
 - Add first Proxmox adapter proof of concept.
 - Add first Tailscale inventory adapter proof of concept.
 - Add screenshots after redaction review.

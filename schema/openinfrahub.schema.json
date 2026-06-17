@@ -1,0 +1,565 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openinfrahub.example/schema/openinfrahub.schema.json",
+  "title": "OpenInfraHub v0.1 Configuration",
+  "description": "A small public schema for generated OpenInfraHub inventory, services, topology, storage, and alerts data.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "nodes",
+    "services",
+    "topology",
+    "storage",
+    "alerts"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "examples": [
+            "Sample Lab"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "examples": [
+            "Generated public demo inventory"
+          ]
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "examples": [
+            "2026-01-15T12:00:00Z"
+          ]
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/service"
+      }
+    },
+    "topology": {
+      "$ref": "#/$defs/topology"
+    },
+    "storage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/storageTarget"
+      }
+    },
+    "alerts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/alert"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$",
+      "examples": [
+        "node-proxmox-01"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "online",
+        "degraded",
+        "offline",
+        "unknown",
+        "maintenance"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "examples": [
+        [
+          "demo",
+          "lab"
+        ]
+      ]
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "examples": [
+            "Proxmox Node"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "server",
+            "vm",
+            "container",
+            "workstation",
+            "network-device",
+            "mobile-device",
+            "storage",
+            "other"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "role": {
+          "type": "string",
+          "examples": [
+            "Virtualization host"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "examples": [
+            "Lab Rack"
+          ]
+        },
+        "managementUrl": {
+          "type": "string",
+          "format": "uri",
+          "examples": [
+            "https://proxmox.example.local:8006"
+          ]
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/interface"
+          }
+        },
+        "resources": {
+          "$ref": "#/$defs/resources"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "interface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "examples": [
+            "mgmt0"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ethernet",
+            "wifi",
+            "vpn",
+            "bridge",
+            "management"
+          ]
+        },
+        "address": {
+          "type": "string",
+          "description": "Use generated hostnames or documentation ranges in public examples.",
+          "examples": [
+            "192.0.2.10"
+          ]
+        },
+        "network": {
+          "type": "string",
+          "examples": [
+            "lab-mgmt"
+          ]
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cpuCores": {
+          "type": "integer",
+          "minimum": 1,
+          "examples": [
+            8
+          ]
+        },
+        "memoryGb": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "examples": [
+            32
+          ]
+        }
+      }
+    },
+    "service": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "examples": [
+            "Home Assistant"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "dashboard",
+            "monitoring",
+            "automation",
+            "source-control",
+            "remote-access",
+            "storage",
+            "network",
+            "custom"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "nodeId": {
+          "$ref": "#/$defs/id"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "examples": [
+            "http://homeassistant.example.local:8123"
+          ]
+        },
+        "check": {
+          "$ref": "#/$defs/check"
+        },
+        "dependsOn": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "target"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "http",
+            "tcp",
+            "ping",
+            "manual"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "examples": [
+            "http://homeassistant.example.local:8123"
+          ]
+        },
+        "intervalSeconds": {
+          "type": "integer",
+          "minimum": 30,
+          "default": 60
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 5
+        }
+      }
+    },
+    "topology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "networks",
+        "edges"
+      ],
+      "properties": {
+        "networks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/network"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/topologyEdge"
+          }
+        }
+      }
+    },
+    "network": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "examples": [
+            "Lab Management"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "lan",
+            "vpn",
+            "wan",
+            "storage",
+            "management",
+            "other"
+          ]
+        },
+        "cidr": {
+          "type": "string",
+          "description": "Use RFC 5737 documentation ranges in public examples.",
+          "examples": [
+            "192.0.2.0/24"
+          ]
+        }
+      }
+    },
+    "topologyEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from",
+        "to",
+        "relation"
+      ],
+      "properties": {
+        "from": {
+          "$ref": "#/$defs/id"
+        },
+        "to": {
+          "$ref": "#/$defs/id"
+        },
+        "relation": {
+          "type": "string",
+          "enum": [
+            "hosts",
+            "runs",
+            "connects-to",
+            "depends-on",
+            "backs-up-to",
+            "mounted-by"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "examples": [
+            "VM runs on the sample Proxmox node"
+          ]
+        }
+      }
+    },
+    "storageTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "examples": [
+            "Files Share"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "smb",
+            "nfs",
+            "block",
+            "object",
+            "datastore",
+            "backup",
+            "other"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "nodeId": {
+          "$ref": "#/$defs/id"
+        },
+        "path": {
+          "type": "string",
+          "examples": [
+            "smb://storage.example.local/files"
+          ]
+        },
+        "capacityGb": {
+          "type": "number",
+          "minimum": 0
+        },
+        "usedGb": {
+          "type": "number",
+          "minimum": 0
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "alert": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "severity",
+        "status",
+        "sourceType",
+        "sourceId",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warning",
+            "critical"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "acknowledged",
+            "resolved"
+          ]
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "node",
+            "service",
+            "storage",
+            "topology",
+            "system"
+          ]
+        },
+        "sourceId": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "examples": [
+            "Service health check degraded"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "examples": [
+            "Generated demo alert for a slow HTTP check."
+          ]
+        },
+        "firstSeen": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastSeen": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "runbookUrl": {
+          "type": "string",
+          "format": "uri",
+          "examples": [
+            "https://docs.example.local/runbooks/service-health"
+          ]
+        },
+        "labels": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    }
+  }
+}

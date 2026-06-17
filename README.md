@@ -51,18 +51,20 @@ The demo is intentionally static so reviewers and contributors can inspect the p
 
 ## Screenshots
 
-Screenshots are intentionally not committed yet.
+The first public screenshots are generated from the static demo in [`demo/`](demo/) and use sample data only.
 
-Before adding screenshots, review [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md). Every screenshot must be cleaned so it does not expose:
+| Desktop dashboard | Mobile operations view |
+| --- | --- |
+| ![Desktop dashboard](docs/assets/dashboard-desktop.png) | ![Mobile dashboard](docs/assets/dashboard-mobile.png) |
+
+Before adding more screenshots, review [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md). Every screenshot must be cleaned so it does not expose:
 
 - Public IPs, private IPs, Tailscale IPs, hostnames, domains, or URLs.
 - Personal names, company names, client names, ticket data, emails, or device serials.
 - API keys, tokens, cookies, QR codes, service tags, or admin panels.
 
-Recommended first screenshot set:
+Recommended next screenshot set:
 
-- Desktop dashboard with sample data only.
-- Mobile dashboard with sample data only.
 - Sanitized topology map.
 - Example node inventory.
 - Example alert state.
@@ -92,6 +94,7 @@ Initial public release:
 - Docker Compose
 - Homepage-compatible dashboard configuration examples
 - YAML configuration
+- JSON Schema for generated config and demo data
 - Markdown documentation
 
 Planned:
@@ -116,9 +119,12 @@ Planned:
 |-- docker-compose.example.yml
 |-- demo/
 |-- config/examples/
+|-- schema/
 |-- docs/
 `-- .github/ISSUE_TEMPLATE/
 ```
+
+See [docs/CONFIG_SCHEMA.md](docs/CONFIG_SCHEMA.md) for the v0.1 JSON Schema covering nodes, services, topology, storage, and alerts.
 
 ## Security Warning
 
