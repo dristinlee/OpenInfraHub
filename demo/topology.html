@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenInfraHub Topology Prototype</title>
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+      .graph { display: grid; gap: 14px; }
+      .row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+      .edge { text-align: center; color: var(--muted); font-size: 13px; }
+      .node { min-width: 140px; text-align: center; padding: 14px; border-radius: 8px; background: #111821; border: 1px solid var(--line); }
+      .node strong { display: block; }
+    </style>
+  </head>
+  <body>
+    <main class="app" style="margin-left:0">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Topology prototype</p>
+          <h1>Sample Infrastructure Graph</h1>
+        </div>
+        <a class="status-pill" href="./index.html">Back to demo</a>
+      </header>
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Generated topology</h2>
+          <span>Nodes and edges from sample data</span>
+        </div>
+        <div id="graph" class="graph"></div>
+      </section>
+    </main>
+    <script src="./topology.js"></script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenInfraHub Tailscale Importer</title>
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+      .tools { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+      .tools input { color: var(--text); }
+      .panel main { display: grid; gap: 16px; }
+      .devices { display: grid; gap: 10px; }
+      .device { display: flex; justify-content: space-between; gap: 12px; padding: 12px; background: #111821; border: 1px solid var(--line); border-radius: 8px; }
+      .device small { display: block; color: var(--muted); margin-top: 4px; }
+    </style>
+  </head>
+  <body>
+    <main class="app" style="margin-left:0">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Tailscale import demo</p>
+          <h1>Sample Fleet Importer</h1>
+        </div>
+        <a class="status-pill" href="./index.html">Back to demo</a>
+      </header>
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Import a sample file</h2>
+          <span>Static public prototype</span>
+        </div>
+        <div class="tools">
+          <input id="file" type="file" accept="application/json">
+          <button id="load-sample" type="button">Load sample</button>
+        </div>
+        <div id="devices" class="devices"></div>
+      </section>
+    </main>
+    <script src="./tailscale.js"></script>
+  </body>
+</html>

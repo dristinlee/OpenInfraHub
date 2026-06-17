@@ -1,0 +1,60 @@
+---
+schemaVersion: "0.1"
+metadata:
+  name: Sample Lab Topology
+  description: Generated public topology example
+nodes:
+  - id: node-alpha
+    name: node-alpha
+    kind: server
+    status: online
+  - id: node-beta
+    name: node-beta
+    kind: container
+    status: online
+  - id: demo-nas
+    name: demo-nas
+    kind: storage
+    status: warning
+services:
+  - id: svc-web-01
+    name: Web UI
+    kind: dashboard
+    status: online
+    nodeId: node-alpha
+topology:
+  networks:
+    - id: net-mgmt
+      name: Management
+      kind: management
+      cidr: 192.0.2.0/24
+  edges:
+    - from: node-alpha
+      to: svc-web-01
+      relation: hosts
+      description: Sample dashboard runs on the virtualization host
+    - from: demo-nas
+      to: node-alpha
+      relation: connects-to
+      description: Sample storage is consumed by the host
+storage:
+  - id: store-files
+    name: Files
+    kind: smb
+    status: online
+    nodeId: demo-nas
+    path: smb://storage.example.local/files
+    capacityGb: 2048
+    usedGb: 512
+    services:
+      - svc-web-01
+alerts:
+  - id: alert-storage-warning
+    severity: warning
+    status: open
+    sourceType: storage
+    sourceId: store-files
+    title: Storage above warning threshold
+    message: Sample storage telemetry shows elevated usage.
+    firstSeen: 2026-01-15T12:15:00Z
+    lastSeen: 2026-01-15T12:20:00Z

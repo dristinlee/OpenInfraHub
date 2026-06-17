@@ -1,0 +1,39 @@
+---
+- id: alert-storage-warning
+  severity: warning
+  status: open
+  sourceType: storage
+  sourceId: store-backup
+  title: Backup vault nearing capacity
+  message: Generated sample alert for a storage target above its preferred threshold.
+  firstSeen: 2026-01-15T12:15:00Z
+  lastSeen: 2026-01-15T12:20:00Z
+  labels:
+    - demo
+    - storage
+
+- id: alert-http-offline
+  severity: critical
+  status: open
+  sourceType: service
+  sourceId: svc-web-01
+  title: HTTP monitor offline
+  message: Sample alert for a failed HTTP health check.
+  firstSeen: 2026-01-15T12:16:00Z
+  lastSeen: 2026-01-15T12:21:00Z
+  labels:
+    - demo
+    - service
+
+- id: alert-topology-info
+  severity: info
+  status: acknowledged
+  sourceType: topology
+  sourceId: net-mgmt
+  title: Topology refreshed
+  message: Generated topology map refreshed successfully.
+  firstSeen: 2026-01-15T12:10:00Z
+  lastSeen: 2026-01-15T12:11:00Z
+  labels:
+    - demo
+    - topology

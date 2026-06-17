@@ -125,6 +125,8 @@ Planned:
 ```
 
 See [docs/CONFIG_SCHEMA.md](docs/CONFIG_SCHEMA.md) for the v0.1 JSON Schema covering nodes, services, topology, storage, and alerts.
+See [docs/REDACTION_GUIDE.md](docs/REDACTION_GUIDE.md) for redaction and screenshot cleanup guidance.
+See [docs/OPERATIONS_MODEL.md](docs/OPERATIONS_MODEL.md) for the adapter and data-model notes that back the remaining public roadmap.
 
 ## Security Warning
 

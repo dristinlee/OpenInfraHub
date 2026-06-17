@@ -1,0 +1,27 @@
+---
+- id: store-files
+  name: Files
+  kind: smb
+  status: online
+  nodeId: demo-nas
+  path: smb://storage.example.local/files
+  capacityGb: 2048
+  usedGb: 512
+  services:
+    - svc-web-01
+  tags:
+    - demo
+
+- id: store-backup
+  name: Backup Vault
+  kind: backup
+  status: warning
+  nodeId: node-alpha
+  path: backup://vault.example.local/nightly
+  capacityGb: 4096
+  usedGb: 3280
+  services:
+    - svc-web-01
+  tags:
+    - demo
+    - backup
