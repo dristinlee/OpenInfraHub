@@ -1,147 +1,258 @@
-# OpenInfraHub Network Hub Report
+# OpenInfraHub Technical Report
 
-Date: 2026-06-17
+Prepared for: OpenAI Codex for Open Source application support
+Repository: https://github.com/dristinlee/OpenInfraHub
+Public safety note: this document avoids private IP addresses, hostnames, keys, logs, screenshots, and live operational paths.
 
-## Purpose
+## 1. Foundation Prompt
 
-This report summarizes the network hub and fleet-management concept behind OpenInfraHub in a way that is safe to publish publicly.
+Use this prompt when asking Codex or another AI coding assistant to improve OpenInfraHub docs, application material, or repo presentation:
 
-It is based on a real private homelab / operations environment, but all sensitive details are generalized here:
+```text
+Build a public-safe technical report and OpenAI Codex for Open Source application summary for OpenInfraHub.
 
-- no real hostnames
-- no real LAN or Tailscale addresses
-- no company identifiers
-- no client data
-- no credentials
-- no private service URLs
+OpenInfraHub is a self-hosted infrastructure command center for homelabs, small teams, technicians, and MSP-style environments. It turns scattered infrastructure notes, service links, fleet state, topology, storage telemetry, alerts, and mobile checks into one operations surface.
 
-The goal is to show the structure of the environment, the device classes it manages, and why the project is a good public OSS candidate.
+Ground the report in the public repository at https://github.com/dristinlee/OpenInfraHub and the private deployment pattern represented by the local home-hub dashboard pattern. Do not expose real IP addresses, hostnames, paths, logs, screenshots, API tokens, SSH keys, or private network details. Use sanitized examples only.
 
-## Executive Summary
+Include:
+- executive summary
+- technical architecture
+- fleet/device model
+- data model
+- operations workflow
+- security and redaction model
+- Mermaid diagrams
+- why the project matters to open source users
+- how Codex/OpenAI access would accelerate maintenance, docs, tests, security review, and adapter development
+- next milestones for Proxmox, Tailscale, Uptime Kuma, Docker, generic HTTP checks, and mobile-first UI
+```
 
-OpenInfraHub is the operations layer for a small but real infrastructure footprint:
+## 2. Executive Summary
 
-- a primary server host running virtualization and container workloads
-- a storage target serving files and backups
-- a gateway and switching layer for the local network
-- a mobile admin path for remote operations
-- a desktop workstation and laptop used for management
-- a hotspot / off-site access layer for resilience
-- a service stack that includes dashboards, monitoring, reverse proxying, remote access, and file services
+OpenInfraHub is a public-safe, open-source extraction of a real self-hosted infrastructure command center. The project is aimed at homelab operators, self-hosters, technicians, small teams, and MSP-style environments that need a simple way to understand what devices exist, what services run where, what is degraded, how storage is trending, and how the network fits together.
 
-The project is intentionally public-safe. The published repo focuses on:
+The current public repository already contains the right OSS foundation:
 
-- sanitized documentation
-- sample data
-- a static demo UI
-- a read-only Proxmox proof of concept
-- topology, alert, and fleet data models
+- Public GitHub repository with MIT license, contributing guide, roadmap, security policy, and launch checklist.
+- Sanitized example configuration for services, topology, storage, alerts, Tailscale, Proxmox, and dashboard widgets.
+- Static demo mode with sample data and generated screenshots.
+- JSON Schema for the OpenInfraHub v0.1 data model.
+- GitHub Actions secret scanning with Gitleaks.
+- A documented security practice for keeping private runtime config outside the public repository.
 
-## System Overview
+The local private dashboard pattern demonstrates that the idea is not only conceptual. It is a working command-center pattern for an edge node: system status, memory, storage, temperature, network interfaces, SSH state, readiness checks, service links, notes, and local service links.
 
-### Core Roles
+## 3. Project Positioning
 
-- `Gateway`: provides WAN access and upstream routing.
-- `Switch`: provides internal LAN distribution and wired device connectivity.
-- `Virtualization Host`: primary compute node for VMs and containers.
-- `Edge Node`: lightweight compute or utility node.
-- `Storage`: files, photos, datastore, and backup capacity.
-- `Admin Workstation`: main desktop operations endpoint.
-- `Mobile Admin Laptop`: portable management endpoint.
-- `Hotspot / Remote Access`: fallback connectivity layer.
+OpenInfraHub solves a practical gap between bookmark dashboards and enterprise monitoring suites. Many small operators run meaningful infrastructure but do not have the time, budget, or staffing for heavy tools. They still need inventory, topology, alerts, storage awareness, and a mobile view for quick checks.
 
-### Service Roles
+The project is strongest when positioned as:
 
-- `Proxmox`: virtualization inventory and host status.
-- `Tailscale`: device visibility, mesh access, and routes.
-- `Home Assistant`: automation and home service integration.
-- `Caddy`: reverse proxy and TLS front door.
-- `Gitea`: internal code hosting.
-- `Guacamole`: browser-based remote access.
-- `Uptime Kuma`: service availability monitoring.
-- `SMB shares`: file and photo storage.
-- `Alerts`: offline, degraded, or capacity-related states.
+- A self-hosted infrastructure register.
+- A mobile-first operations dashboard.
+- A public-safe template for converting private infrastructure knowledge into reusable OSS.
+- A future adapter platform for Proxmox, Tailscale, Uptime Kuma, Docker, Home Assistant, SNMP, and generic HTTP checks.
 
-## Topology Diagram
+## 4. Current Evidence
+
+### Public Repository
+
+OpenInfraHub is published at:
+
+```text
+https://github.com/dristinlee/OpenInfraHub
+```
+
+Current repo attributes observed:
+
+- Public repository.
+- Default branch: `main`.
+- Description: self-hosted infrastructure command center for homelabs, small teams, technicians, and MSP-style environments.
+- Topics include: `self-hosted`, `homelab`, `infrastructure`, `monitoring`, `proxmox`, `tailscale`, `docker`, `dashboard`, `devops`, and `sysadmin`.
+- Public-safe file structure includes `demo/`, `docs/`, `schema/`, `config/examples/`, and `.github/workflows/`.
+
+### Public Demo and Evidence
+
+The public repo already has:
+
+- a static demo with sample fleet data
+- desktop and mobile screenshots from the sanitized demo
+- a topology prototype
+- a Tailscale import prototype
+- a Proxmox read-only proof of concept
+- schema and documentation for the data model
+
+## 5. Architecture Overview
 
 ```mermaid
 flowchart TD
-  WAN[(Internet)] --> GW[Gateway]
-  GW --> SW[Managed Switch]
-  SW --> PH[Primary Virtualization Host]
-  SW --> NAS[Storage / Files]
-  SW --> EDGE[Edge Node]
-  SW --> WS[Desktop Workstation]
-  SW --> LAP[Mobile Admin Laptop]
-  SW --> HA[Automation / Home Services]
-  SW --> PROXY[Reverse Proxy]
-  SW --> MON[Monitoring]
-  LAP --> TS[Tailscale Mesh]
-  WS --> TS
-  PH --> VM1[Web Services VM]
-  PH --> LXC1[Monitoring LXC]
-  PH --> LXC2[Remote Access LXC]
-  NAS --> BKP[Backups]
-  PROXY --> VM1
-  MON --> PH
-  MON --> NAS
-  MON --> EDGE
+    User["Operator / Technician"] --> Browser["Desktop or Mobile Browser"]
+    Browser --> UI["OpenInfraHub Web UI"]
+    UI --> API["API Layer"]
+    API --> Inventory["Inventory Store"]
+    API --> Alerts["Alert Engine"]
+    API --> Topology["Topology Model"]
+    API --> Storage["Storage Telemetry"]
+    API --> Adapters["Plugin Adapter Runtime"]
+
+    Adapters --> Proxmox["Proxmox Adapter"]
+    Adapters --> Tailscale["Tailscale Adapter"]
+    Adapters --> Uptime["Uptime Kuma Adapter"]
+    Adapters --> Docker["Docker Adapter"]
+    Adapters --> HomeAssistant["Home Assistant Adapter"]
+    Adapters --> HTTP["Generic HTTP Checks"]
+
+    Inventory --> UI
+    Alerts --> UI
+    Topology --> UI
+    Storage --> UI
 ```
 
-## Control Plane Diagram
+## 6. Fleet and Device Model
+
+OpenInfraHub models infrastructure as a set of nodes, services, topology edges, storage targets, and alerts.
 
 ```mermaid
 flowchart LR
-  B[Browser] --> UI[OpenInfraHub UI]
-  UI --> D1[Demo Data]
-  UI --> D2[Config Examples]
-  UI --> D3[Schema]
-  UI --> D4[Adapter PoCs]
-  D4 --> P[Proxmox Read-only PoC]
-  D4 --> T[Tailscale Sample Importer]
-  D4 --> H[HTTP Monitoring Model]
+    Internet["Internet / WAN"] --> Gateway["Gateway / Router"]
+    Gateway --> Switch["Managed Switch"]
+    Switch --> Proxmox["Virtualization Host"]
+    Switch --> NAS["Storage / NAS"]
+    Switch --> Pi["Edge Node / Raspberry Pi"]
+    Switch --> Workstation["Admin Workstation"]
+
+    Proxmox --> VM1["VM: Web / Apps"]
+    Proxmox --> LXC1["LXC: Monitoring"]
+    Proxmox --> HA["Home Assistant"]
+
+    NAS --> Backups["Backups / Shares"]
+    NAS --> Datastore["VM Datastore"]
+
+    Pi --> LocalDash["Local Command Center"]
+    Pi --> Sync["Sync / Utility Services"]
+
+    Tailscale["Tailscale Mesh"] -. secure remote access .- Gateway
+    Tailscale -. remote admin .- Workstation
+    Tailscale -. device inventory .- Pi
 ```
 
-## Fleet Summary
+Supported device categories:
 
-| Device / Role | Purpose | Notes |
-| --- | --- | --- |
-| Primary server host | Virtualization and container compute | Runs the bulk of hosted services and infrastructure workloads. |
-| Storage target | Files, photos, datastore, and backup capacity | Shared storage and backup destination. |
-| Gateway | WAN routing and upstream access | Provides internet edge connectivity. |
-| Managed switch | LAN distribution | Wires the local infrastructure together. |
-| Edge node | Lightweight services | Useful for small utility workloads or side services. |
-| Desktop workstation | Operations and development | Main desktop control point. |
-| Mobile admin laptop | Portable control plane | Used for administration from anywhere on the LAN or via mesh access. |
-| Hotspot / remote access | Connectivity fallback | Provides off-site or backup access path. |
+- Servers and virtualization hosts.
+- VMs and LXC containers.
+- Storage devices and shares.
+- Network devices such as gateways and switches.
+- Workstations and mobile admin devices.
+- Edge nodes such as Raspberry Pi systems.
+- Service endpoints and dashboards.
 
-## Service Matrix
+## 7. Data Model
 
-| Service | Role | Public-safe status |
-| --- | --- | --- |
-| Proxmox | Host and VM inventory | Modeled by schema and read-only PoC |
-| Tailscale | Mesh visibility | Modeled by sample importer and static demo |
-| Home Assistant | Automation | Demo/config example only |
-| Caddy | Reverse proxy | Documented in the public-safe stack |
-| Gitea | Internal source hosting | Mentioned as a service class, not exposed privately |
-| Guacamole | Remote access | Mentioned as a service class, not exposed privately |
-| Uptime Kuma | Monitoring | Covered by data model and adapter notes |
-| SMB storage | Shared files | Modeled in storage examples |
+The public schema describes five core object groups:
 
-## Operational Signals
+- `nodes`: servers, VMs, containers, workstations, network devices, mobile devices, and storage targets.
+- `services`: monitored applications, dashboards, admin panels, and endpoints.
+- `topology`: networks and relationships between nodes, services, storage, and routes.
+- `storage`: SMB, NFS, block, object, backup, and datastore targets.
+- `alerts`: health, dependency, capacity, and topology findings.
 
-OpenInfraHub is designed to answer these questions quickly:
+```mermaid
+erDiagram
+    NODE ||--o{ SERVICE : hosts
+    NODE ||--o{ INTERFACE : exposes
+    NODE ||--o{ STORAGE : owns
+    NODE ||--o{ ALERT : reports
+    SERVICE ||--o{ ALERT : triggers
+    STORAGE ||--o{ ALERT : triggers
+    NODE ||--o{ TOPOLOGY_EDGE : from
+    NODE ||--o{ TOPOLOGY_EDGE : to
 
-- What is online?
-- What is offline?
-- Which nodes are overloaded?
-- Which services are degraded?
-- Where does a service live?
-- Which storage targets are growing too fast?
-- What is reachable over the mesh network?
-- What changed since the last check?
+    NODE {
+      string id
+      string name
+      string kind
+      string status
+    }
 
-## Why This Matters For OSS Qualification
+    SERVICE {
+      string id
+      string name
+      string kind
+      string status
+      string nodeId
+    }
+
+    STORAGE {
+      string id
+      string name
+      string kind
+      string status
+      number capacityGb
+      number usedGb
+    }
+
+    ALERT {
+      string id
+      string severity
+      string status
+      string sourceType
+      string sourceId
+    }
+
+    TOPOLOGY_EDGE {
+      string from
+      string to
+      string relation
+    }
+```
+
+## 8. Operations Workflow
+
+```mermaid
+sequenceDiagram
+    participant Operator
+    participant UI as OpenInfraHub UI
+    participant API as API Layer
+    participant Adapter as Collector Adapter
+    participant Store as Inventory Store
+    participant Alerts as Alert Engine
+
+    Operator->>UI: Open dashboard on desktop or mobile
+    UI->>API: Request fleet summary
+    API->>Store: Load nodes, services, topology, storage
+    API->>Alerts: Load active alerts
+    API-->>UI: Return normalized status model
+    UI-->>Operator: Show health, topology, alerts, and storage
+
+    Adapter->>API: Submit read-only collector result
+    API->>Store: Normalize inventory and service status
+    API->>Alerts: Evaluate offline, degraded, and capacity states
+    Alerts-->>Store: Persist alert records
+```
+
+## 9. Security and Redaction Model
+
+OpenInfraHub is infrastructure software, so accidental disclosure risk is high. The public project already treats that as a core design constraint.
+
+Current security posture:
+
+- Public repo contains code, docs, schemas, demo data, and sanitized examples only.
+- Private runtime configuration stays outside Git.
+- Screenshots use generated sample data.
+- `.env`, secrets, tokens, SSH keys, private hostnames, IP addresses, service URLs, logs, and customer/company data are excluded.
+- GitHub Actions runs Gitleaks on push and pull request.
+- Security docs include release scan commands and a public/private data separation policy.
+
+Recommended next hardening steps:
+
+- Add schema validation in CI for all `config/examples/` files.
+- Add demo smoke tests.
+- Add adapter unit tests with fixture-based sample responses.
+- Add a public redaction checklist to every release.
+- Add a `SECURITY_REVIEW.md` or release template requiring secret scan confirmation.
+
+## 10. Why This Matters For OSS Qualification
 
 This repository is strong enough to support an OpenAI / Codex-for-OSS style review because it now shows:
 
@@ -160,7 +271,7 @@ The project is also relevant to a broad audience:
 - self-hosters
 - MSP-style environments
 
-## What Is Still Private
+## 11. What Is Still Private
 
 The following remain intentionally out of the public repo:
 
@@ -171,7 +282,7 @@ The following remain intentionally out of the public repo:
 - real screenshots from private admin panels
 - private logs and backup copies
 
-## Public Repo State
+## 12. Public Repo State
 
 OpenInfraHub now includes:
 
@@ -185,7 +296,7 @@ OpenInfraHub now includes:
 - topology prototype
 - secret scanning CI
 
-## Next Technical Steps
+## 13. Next Technical Steps
 
 The next meaningful implementation steps are:
 
@@ -194,3 +305,4 @@ The next meaningful implementation steps are:
 3. Wire the Proxmox read-only collector into the UI.
 4. Add Tailscale import and topology rendering from normalized data.
 5. Add real tests and a release build pipeline.
+
