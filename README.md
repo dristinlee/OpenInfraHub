@@ -129,7 +129,6 @@ See [docs/REDACTION_GUIDE.md](docs/REDACTION_GUIDE.md) for redaction and screens
 See [docs/OPERATIONS_MODEL.md](docs/OPERATIONS_MODEL.md) for the adapter and data-model notes that back the remaining public roadmap.
 See [docs/PROXMOX_READONLY_POC.md](docs/PROXMOX_READONLY_POC.md) for a read-only Proxmox collection example.
 See [docs/NETWORK_HUB_REPORT.md](docs/NETWORK_HUB_REPORT.md) for the sanitized technical report, diagrams, and fleet summary.
-See [docs/CODEX_FOR_OSS_APPLICATION.md](docs/CODEX_FOR_OSS_APPLICATION.md) for a form-ready application packet.
 
 ## Security Warning
 
